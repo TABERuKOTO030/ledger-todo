@@ -449,7 +449,7 @@ h1>span:first-child,h1 span{color:#E77DA3!important}
  <div class="warn">⚠️ 数据使用你的主密码加密（AES-GCM）。<b>密码忘记后无法找回，数据也无法恢复</b>，请务必牢记，并定期导出备份。</div>
 </form></div>
 <header><div class="wrap">
-<h1><span>Ledger</span><span style="display:flex;gap:6px"><button class="gear" id="gear" title="外观设置" aria-label="外观设置">⚙️</button><select id="cur" title="货币"><option value="¥">¥ 人民币</option><option value="USDT ">USDT</option><option value="$">$ 美元</option></select></span></h1>
+<h1><span>Ledger</span><span style="display:flex;gap:6px"><button class="gear" id="gear" title="外观设置" aria-label="外观设置">⚙️</button><select id="cur" title="货币"><option value="¥">¥ 人民币</option><option value="USDT ">USDT</option><option value="$">$ 美元</option><option value="JP¥">JP¥ 日元</option></select></span></h1>
 <div class="sub">今天也要好好生活</div>
 <div class="banner"><div class="bn-grid"></div><div class="bn-tag"></div><div class="bn-t">LEDGER<small>记账 · 事项</small></div><div class="bn-k">KEEP TRACK OF EVERY<br>LITTLE SWEET DAY.</div><div class="bn-d"><i id="bnDate"></i><span>TODAY</span></div></div>
 <div class="bncap">LEDGER<span>|</span>记账本</div>
@@ -536,7 +536,7 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 const pad=n=>String(n).padStart(2,'0');
 const today=()=>{const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())};
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
-const money=n=>S.currency+(Math.round(n*100)/100).toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2});
+const money=n=>{const d=S.currency==='JP¥'?0:2;return S.currency+(Math.round(n*Math.pow(10,d))/Math.pow(10,d)).toLocaleString('zh-CN',{minimumFractionDigits:d,maximumFractionDigits:d})};
 let ym=today().slice(0,7), ltype='exp', tfilter='all';
 
 // tabs
